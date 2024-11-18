@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app, auth } from "../firebase";
-import image from "../assets/auth bg.jpeg";
 import { ToastContainer, toast } from "react-toastify";
+import { FaArrowAltCircleLeft } from "react-icons/fa";
+import image from "../assets/logo.png";
 import "react-toastify/dist/ReactToastify.css";
 
 const db = getFirestore(app);
@@ -50,24 +51,32 @@ const SignUp = () => {
       });
 
       toast.success("Account created successfully!");
-      navigate("/add");
+      navigate("/logIn");
     } catch (error) {
       toast.error("Invalid Data Entered Failed to Create Account!");
     }
   };
+  const redirectToLogout=()=>{
+    navigate("/logIn");
+  }
 
   return (
-    <div
-      className="w-full h-screen bg-cover bg-center bg-gradient-to-r from-gray-950 via-purple-900 to-gray-950"
-      // style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="w-full h-screen bg-cover bg-center bg-white">
       <ToastContainer />
-      <div className="flex justify-center items-center w-full h-full bg-black bg-opacity-70 px-4">
-        <div className="flex flex-col items-center bg-gradient-to-r from-gray-500 via-purple-300 to-gray-500 bg-opacity-80 w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg">
-          <p className="w-full text-center font-extrabold text-xl md:text-2xl lg:text-3xl mb-6 text-red-900">
+      <div className="flex justify-center items-center w-full h-full px-4">
+        <div className="flex w-[30rem] h-[36rem] flex-col items-center bg-purple-50 bg-opacity-100 shadow-md border-2 shadow-purple-500 max-w-md md:max-w-lg lg:max-w-xl p-2 rounded-lg">
+          <button className="text-purple-900 text-xl mr-[25rem] mt-4 hover:text-purple-800"
+          onClick={redirectToLogout}>
+            <FaArrowAltCircleLeft />
+          </button>
+          <p
+            className="bg-cover bg-center mb-3 w-[5rem] h-[5rem] rounded-2xl"
+            style={{ backgroundImage: `url(${image})` }}
+          />
+          <p className="w-full text-center font-extrabold text-xl md:text-2xl lg:text-3xl mb-2 text-red-900">
             WELCOME!
           </p>
-          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-8 text-purple-950">
+          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-4 text-purple-950">
             Create Your Account
           </p>
           <input
@@ -75,44 +84,44 @@ const SignUp = () => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="Enter your First Name"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Enter your Last Name"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your Email"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your Password"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-500 transition duration-300"
           />
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm your Password"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <button
             onClick={handleSignUp}
             disabled={loading}
-            className={`w-[80%] p-3 rounded-md text-white font-bold 
+            className={`w-[80%] p-2 rounded-md text-white font-bold 
           ${
             loading
               ? "bg-blue-300 cursor-not-allowed"
-              : "bg-gradient-to-r from-gray-900 via-purple-500 to-gray-900 hover:bg-gradient-to-r hover:from-gray-700 hover:via-purple-400 hover:to-gray-700"
+              : "bg-purple-800 hover:bg-purple-900"
           } 
           transition duration-300`}
           >
