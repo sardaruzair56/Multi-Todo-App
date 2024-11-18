@@ -62,12 +62,12 @@ const SignUp = () => {
       style={{ backgroundImage: `url(${image})` }}
     >
       <ToastContainer />
-      <div className="flex justify-center items-center w-full h-full bg-black bg-opacity-70">
-        <div className="flex flex-col items-center bg-gray-200 bg-opacity-70 w-[30%] h-[35rem] justify-center rounded-lg p-6 shadow-lg">
-        <p className="w-[80%] flex items-center justify-center font-extrabold text-2xl mb-8 text-red-900">
+      <div className="flex justify-center items-center w-full h-full bg-black bg-opacity-70 px-4">
+        <div className="flex flex-col items-center bg-gray-200 bg-opacity-80 w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg">
+          <p className="w-full text-center font-extrabold text-xl md:text-2xl lg:text-3xl mb-6 text-red-900">
             WELCOME!
           </p>
-          <p className="w-[80%] flex items-center justify-center font-extrabold text-2xl mb-8 text-gray-900">
+          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-8 text-gray-900">
             Create Your Account
           </p>
           <input
@@ -109,16 +109,16 @@ const SignUp = () => {
             onClick={handleSignUp}
             disabled={loading}
             className={`w-[80%] p-3 rounded-md text-white font-bold 
-            ${
-              loading
-                ? "bg-blue-300 cursor-not-allowed"
-                : "bg-gray-900 hover:bg-gray-800"
-            } 
-            transition duration-300`}
+          ${
+            loading
+              ? "bg-blue-300 cursor-not-allowed"
+              : "bg-gray-900 hover:bg-gray-800"
+          } 
+          transition duration-300`}
           >
             {loading ? "Creating Account..." : "Create Account"}
           </button>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
     </div>

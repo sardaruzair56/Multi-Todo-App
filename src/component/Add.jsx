@@ -123,11 +123,11 @@ const Add = () => {
 
     const newList = {
       title,
-      todos: tasks.map((task) => ({ text: task })), 
+      todos: tasks.map((task) => ({ text: task })),
       userId: user.uid,
     };
 
-    dispatch(addListToFirebase({ list: newList, userId: user.uid })); 
+    dispatch(addListToFirebase({ list: newList, userId: user.uid }));
     setTitle("");
     setTasks([""]);
   };
@@ -175,22 +175,22 @@ const Add = () => {
 
   return (
     <div
-      className="w-full h-max-screen bg-cover bg-center"
+      className="w-full min-h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${image})` }}
     >
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center p-4">
         <button
           onClick={handleLogout}
-          className="w-10 h-10 ml-[90%] flex items-center justify-center bg-red-700 text-white py-2 rounded-3xl"
+          className="w-10 h-10 ml-auto flex items-center justify-center bg-red-700 text-white py-2 rounded-3xl"
         >
           <IoLogOutSharp />
         </button>
 
-        <h1 className="text-3xl font-semibold text-white bg-slate-500 rounded-2xl px-6 py-3 mb-10 w-[50rem] text-center sticky top-0 z-10">
+        <h1 className="text-2xl md:text-3xl font-semibold text-white bg-slate-500 rounded-2xl px-4 md:px-6 py-3 mb-10 max-w-full md:w-[50rem] text-center sticky top-0 z-10">
           ToDo App
         </h1>
 
-        <div className="bg-slate-500 rounded-lg p-6 w-[36rem] h-[50%]">
+        <div className="bg-slate-500 rounded-lg p-6 w-full md:w-[36rem]">
           <input
             type="text"
             value={title}
@@ -205,7 +205,7 @@ const Add = () => {
                 value={task}
                 onChange={(e) => handleTaskChange(index, e.target.value)}
                 placeholder="Enter task"
-                className="w-[80%] mb-4 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+                className="w-[80%] md:w-[70%] mb-4 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
               />
               {tasks.length === 1 ? (
                 <button
@@ -243,81 +243,77 @@ const Add = () => {
           <button
             onClick={addListInArray}
             disabled={loading}
-            className={`w-[80%] p-3 rounded-md text-white font-bold text-2xl 
-            ${
-              loading
-                ? "bg-blue-300 cursor-not-allowed"
-                : "bg-gray-900 hover:bg-gray-800"
-            } 
-            transition duration-300`}
+            className={`w-full md:w-[80%] p-3 rounded-md text-white font-bold text-xl md:text-2xl 
+  ${
+    loading ? "bg-blue-300 cursor-not-allowed" : "bg-gray-900 hover:bg-gray-800"
+  } 
+  transition duration-300`}
           >
             {loading ? "Logging in..." : "Add Todo"}
           </button>
         </div>
 
-        <div className="mt-8 w-[36rem]">
+        <div className="mt-8 w-[100%] md:w-[36rem]">
           {storeLists?.length ? (
             storeLists.map((list, listIndex) => (
               <div
                 key={list.id || listIndex}
                 className="mb-6 p-4 bg-slate-500 rounded-lg shadow-md"
               >
-                <div className="flex flex-row">
-                  <h2 className="text-3xl font-bold text-white mb-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl md:text-3xl font-bold text-white">
                     {list.title}
                   </h2>
-                  <button
-                    onClick={() => openEditModal(list, listIndex)}
-                    disabled={loading}
-                    className={` ml-[20rem] p-2 h-10 rounded-xl text-white font-bold text-xl 
-                      ${
-                        loading
-                          ? "bg-gray-300 cursor-not-allowed"
-                          : "bg-gray-900 hover:bg-gray-600"
-                      } 
-                      transition duration-300`}
-                  >
-                    {loading ? "Logging in..." : ""}
-                    <FiEdit />
-                  </button>
-                  <button
-                    disabled={loading}
-                    onClick={() => handleDeleteList(list.id)}
-                    className={` ml-[1rem] p-2 h-10 rounded-xl text-white font-bold text-xl 
-                      ${
-                        loading
-                          ? "bg-red-300 cursor-not-allowed"
-                          : "bg-red-700 hover:bg-red-600"
-                      } 
-                      transition duration-300`}
-                  >
-                    {loading ? "Logging in..." : ""}
-                    <RiDeleteBin6Fill />
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => openEditModal(list, listIndex)}
+                      disabled={loading}
+                      className={`p-2 h-10 rounded-xl text-white font-bold text-sm md:text-xl 
+                ${
+                  loading
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-gray-900 hover:bg-gray-600"
+                } 
+                transition duration-300`}
+                    >
+                      <FiEdit />
+                    </button>
+                    <button
+                      disabled={loading}
+                      onClick={() => handleDeleteList(list.id)}
+                      className={`p-2 h-10 rounded-xl text-white font-bold text-sm md:text-xl 
+                ${
+                  loading
+                    ? "bg-red-300 cursor-not-allowed"
+                    : "bg-red-700 hover:bg-red-600"
+                } 
+                transition duration-300`}
+                    >
+                      <RiDeleteBin6Fill />
+                    </button>
+                  </div>
                 </div>
                 {list.todos?.map((todo, todoIndex) => (
                   <div
                     key={todo.id || todoIndex}
-                    className="flex items-center mb-2"
+                    className="flex flex-wrap items-center mt-4 justify-between mb-2 gap-2"
                   >
                     <input
                       type="text"
                       value={todo.text}
-                      className="w-[70%] mb-2 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+                      className="flex-grow p-3 text-base md:text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
                     />
-
                     <button
                       onClick={() => handleDeleteTodo(list.id, todo.id)}
                       disabled={loading}
-                      className={` ml-[4rem] p-2 rounded-xl text-white font-bold text-xl 
-                      ${
-                        loading
-                          ? "bg-red-300 cursor-not-allowed"
-                          : "bg-red-700 hover:bg-red-600"
-                      } 
-                      transition duration-300`}
+                      className={`p-2 rounded-xl text-white font-bold text-sm md:text-xl 
+              ${
+                loading
+                  ? "bg-red-300 cursor-not-allowed"
+                  : "bg-red-700 hover:bg-red-600"
+              } 
+              transition duration-300`}
                     >
-                      {loading ? "Logging in..." : ""}
                       <MdOutlineCancel />
                     </button>
                   </div>
@@ -325,32 +321,36 @@ const Add = () => {
               </div>
             ))
           ) : (
-            <p className="font-extrabold text-white">No Data Avaliable</p>
+            <p className="font-extrabold text-white text-center">
+              No Data Available
+            </p>
           )}
         </div>
 
         {editModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg w-[36rem] max-h-screen">
-              <div className="flex flex-row">
-                <p className="text-2xl font-semibold text-white bg-slate-500 rounded-xl px-6 py-3 mb-10 w-[80%] text-center">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
+            <div className="bg-white p-6 rounded-lg w-full max-w-[36rem] max-h-screen overflow-y-auto">
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-xl md:text-2xl font-semibold text-white bg-slate-500 rounded-xl px-4 py-2 md:px-6 md:py-3 text-center">
                   Update Your Tasks
                 </p>
                 <button
                   onClick={closeEdit}
-                  className="bg-red-700 text-white text-xl mb-4 p-2 ml-[40%] w-8.5 h-9 rounded-3xl"
+                  className="bg-red-700 text-white text-base md:text-xl p-2 rounded-3xl hover:bg-red-600 transition"
                 >
                   <GiCancel />
                 </button>
               </div>
+
               <input
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 placeholder="Edit list title"
-                className="w-[70%] mb-2 p-3 text-lg font-bold rounded-md bg-gray-400 text-white placeholder-gray-100 focus:outline-none focus:bg-gray-500 focus:ring-2 focus:ring-gray-500 transition duration-300"
+                className="w-full mb-4 p-3 text-base md:text-lg font-bold rounded-md bg-gray-400 text-white placeholder-gray-100 focus:outline-none focus:bg-gray-500 focus:ring-2 focus:ring-gray-500 transition"
               />
-              <div className="space-y-2">
+
+              <div className="space-y-4">
                 {editTasks.map((task, index) => (
                   <div key={index} className="flex items-center space-x-4">
                     <input
@@ -360,12 +360,12 @@ const Add = () => {
                         handleEditTaskChange(index, e.target.value)
                       }
                       placeholder="Edit task"
-                      className="w-[70%] mb-2 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+                      className="flex-grow p-3 text-base md:text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition"
                     />
                     {editTasks.length === 1 ? (
                       <button
                         onClick={() => addNewTaskToEdit(index)}
-                        className="bg-gray-900 text-white text-xl ml-2 p-2 rounded-2xl"
+                        className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
                       >
                         <IoMdAdd />
                       </button>
@@ -373,13 +373,13 @@ const Add = () => {
                       <>
                         <button
                           onClick={() => removeTaskFromEdit(index)}
-                          className="bg-gray-900 text-white text-xl ml-4  hover:bg-gray-600 p-2 rounded-2xl"
+                          className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
                         >
                           <FaMinus />
                         </button>
                         <button
                           onClick={() => addNewTaskToEdit(index)}
-                          className="bg-gray-900 text-white text-xl ml-2 hover:bg-gray-600 p-2 rounded-2xl"
+                          className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
                         >
                           <IoMdAdd />
                         </button>
@@ -387,7 +387,7 @@ const Add = () => {
                     ) : (
                       <button
                         onClick={() => removeTaskFromEdit(index)}
-                        className="bg-gray-900 text-white text-xl ml-2  hover:bg-gray-600 p-2 rounded-2xl"
+                        className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
                       >
                         <FaMinus />
                       </button>
@@ -395,15 +395,16 @@ const Add = () => {
                   </div>
                 ))}
               </div>
+
               <button
                 onClick={saveEditChanges}
-                className={`w-[40%] p-3 rounded-3xl ml-[10%] text-white font-bold text-2xl 
-                  ${
-                    loading
-                      ? "bg-blue-300 cursor-not-allowed"
-                      : "bg-gray-900  hover:bg-gray-600"
-                  } 
-                  transition duration-300`}
+                className={`w-full md:w-[60%] p-3 rounded-3xl mt-6 text-white font-bold text-lg md:text-2xl 
+          ${
+            loading
+              ? "bg-blue-300 cursor-not-allowed"
+              : "bg-gray-900 hover:bg-gray-600"
+          } 
+          transition duration-300`}
               >
                 {loading ? "Logging in..." : "Update"}
               </button>
