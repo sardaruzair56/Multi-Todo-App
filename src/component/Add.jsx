@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineCancel } from "react-icons/md";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import image from "../assets/main-bg.jpeg";
+import image from "../assets/img-bg.jpg";
 import {
   addListToFirebase,
   fetchListsFromFirebase,
@@ -175,8 +175,8 @@ const Add = () => {
 
   return (
     <div
-      className="w-full min-h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${image})` }}
+      className="w-full min-h-screen bg-cover bg-center bg-gradient-to-r from-gray-950 via-purple-900 to-gray-950"
+      // style={{ backgroundImage: `url(${image})` }}
     >
       <div className="flex flex-col items-center justify-center p-4">
         <button
@@ -186,17 +186,17 @@ const Add = () => {
           <IoLogOutSharp />
         </button>
 
-        <h1 className="text-2xl md:text-3xl font-semibold text-white bg-slate-500 rounded-2xl px-4 md:px-6 py-3 mb-10 max-w-full md:w-[50rem] text-center sticky top-0 z-10">
+        <h1 className="text-2xl w-[60%] md:text-3xl font-semibold text-white bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 rounded-2xl px-4 md:px-6 py-3 mb-10 max-w-full md:w-[45rem] text-center sticky top-0 z-10">
           ToDo App
         </h1>
 
-        <div className="bg-slate-500 rounded-lg p-6 w-full md:w-[36rem]">
+        <div className=" bg-gradient-to-r from-gray-400 via-purple-300 to-gray-400 rounded-lg p-6 md:w-[30rem]">
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter Title"
-            className="w-[80%] mb-4 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+            className="w-[80%] mb-4 p-2 text-lg rounded-md bg-purple-100 text-gray-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           {tasks.map((task, index) => (
             <div key={index} className="flex items-center mb-4">
@@ -205,12 +205,12 @@ const Add = () => {
                 value={task}
                 onChange={(e) => handleTaskChange(index, e.target.value)}
                 placeholder="Enter task"
-                className="w-[80%] md:w-[70%] mb-4 p-3 text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+                className="w-[90%] md:w-[80%] mb-4 p-2 text-lg rounded-md bg-gray-100 text-gray-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
               />
               {tasks.length === 1 ? (
                 <button
                   onClick={() => addNewTask(index)}
-                  className="bg-gray-900 text-white text-xl ml-4 p-2 rounded-2xl"
+                  className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 text-white text-xl ml-4 p-1 rounded-xl"
                 >
                   <IoMdAdd />
                 </button>
@@ -218,13 +218,13 @@ const Add = () => {
                 <>
                   <button
                     onClick={() => removeTask(index)}
-                    className="bg-gray-900 text-white text-xl ml-4 p-2 rounded-2xl"
+                    className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 text-white text-xl ml-4 p-1 rounded-xl"
                   >
                     <FaMinus />
                   </button>
                   <button
                     onClick={() => addNewTask(index)}
-                    className="bg-gray-900 text-white text-xl ml-2 p-2 rounded-2xl"
+                    className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 text-white text-xl ml-2 p-1 rounded-xl"
                   >
                     <IoMdAdd />
                   </button>
@@ -232,7 +232,7 @@ const Add = () => {
               ) : (
                 <button
                   onClick={() => removeTask(index)}
-                  className="bg-gray-900 text-white text-xl ml-4 p-2 rounded-2xl"
+                  className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 text-white text-xl ml-4 p-1 rounded-xl"
                 >
                   <FaMinus />
                 </button>
@@ -243,9 +243,9 @@ const Add = () => {
           <button
             onClick={addListInArray}
             disabled={loading}
-            className={`w-full md:w-[80%] p-3 rounded-md text-white font-bold text-xl md:text-2xl 
+            className={`w-full md:w-[70%] p-2 rounded-lg text-white font-bold text-xl md:text-2xl  
   ${
-    loading ? "bg-blue-300 cursor-not-allowed" : "bg-gray-900 hover:bg-gray-800"
+    loading ? "bg-blue-300 cursor-not-allowed" : "bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600"
   } 
   transition duration-300`}
           >
@@ -253,26 +253,26 @@ const Add = () => {
           </button>
         </div>
 
-        <div className="mt-8 w-[100%] md:w-[36rem]">
+        <div className="mt-8 w-[100%] md:w-[30rem]">
           {storeLists?.length ? (
             storeLists.map((list, listIndex) => (
               <div
                 key={list.id || listIndex}
-                className="mb-6 p-4 bg-slate-500 rounded-lg shadow-md"
+                className="mb-6 p-3 bg-gradient-to-r from-gray-500 via-purple-300 to-gray-500 rounded-lg shadow-md"
               >
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl md:text-3xl font-bold text-white">
+                  <h2 className="text-xl md:text-2xl font-bold text-white">
                     {list.title}
                   </h2>
                   <div className="flex gap-2">
                     <button
                       onClick={() => openEditModal(list, listIndex)}
                       disabled={loading}
-                      className={`p-2 h-10 rounded-xl text-white font-bold text-sm md:text-xl 
+                      className={`p-2 h-8 rounded-xl mt-2 text-white font-bold text-sm md:text-sm 
                 ${
                   loading
                     ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-gray-900 hover:bg-gray-600"
+                    : "bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600"
                 } 
                 transition duration-300`}
                     >
@@ -281,7 +281,7 @@ const Add = () => {
                     <button
                       disabled={loading}
                       onClick={() => handleDeleteList(list.id)}
-                      className={`p-2 h-10 rounded-xl text-white font-bold text-sm md:text-xl 
+                      className={`p-2 h-8 rounded-xl mt-2 text-white font-bold text-sm md:text-sm 
                 ${
                   loading
                     ? "bg-red-300 cursor-not-allowed"
@@ -301,12 +301,12 @@ const Add = () => {
                     <input
                       type="text"
                       value={todo.text}
-                      className="flex-grow p-3 text-base md:text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
+                      className="flex-grow p-2 text-base md:text-lg rounded-md bg-gray-100 text-gray-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
                     />
                     <button
                       onClick={() => handleDeleteTodo(list.id, todo.id)}
                       disabled={loading}
-                      className={`p-2 rounded-xl text-white font-bold text-sm md:text-xl 
+                      className={`p-2 rounded-xl text-white font-bold text-sm md:text-sm 
               ${
                 loading
                   ? "bg-red-300 cursor-not-allowed"
@@ -331,12 +331,12 @@ const Add = () => {
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
             <div className="bg-white p-6 rounded-lg w-full max-w-[36rem] max-h-screen overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
-                <p className="text-xl md:text-2xl font-semibold text-white bg-slate-500 rounded-xl px-4 py-2 md:px-6 md:py-3 text-center">
+                <p className="text-xl md:text-2xl font-semibold text-white bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 rounded-xl px-4 py-2 md:px-6 md:py-3 text-center">
                   Update Your Tasks
                 </p>
                 <button
                   onClick={closeEdit}
-                  className="bg-red-700 text-white text-base md:text-xl p-2 rounded-3xl hover:bg-red-600 transition"
+                  className="bg-red-700 text-white text-base md:text-lg p-2 rounded-2xl hover:bg-red-600 transition"
                 >
                   <GiCancel />
                 </button>
@@ -347,7 +347,7 @@ const Add = () => {
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 placeholder="Edit list title"
-                className="w-full mb-4 p-3 text-base md:text-lg font-bold rounded-md bg-gray-400 text-white placeholder-gray-100 focus:outline-none focus:bg-gray-500 focus:ring-2 focus:ring-gray-500 transition"
+                className="w-[80%] mb-4 p-2 text-base md:text-lg font-bold rounded-md bg-gray-400 text-white placeholder-gray-400 focus:outline-none focus:bg-gray-500 focus:ring-2 focus:ring-gray-500 transition"
               />
 
               <div className="space-y-4">
@@ -360,12 +360,12 @@ const Add = () => {
                         handleEditTaskChange(index, e.target.value)
                       }
                       placeholder="Edit task"
-                      className="flex-grow p-3 text-base md:text-lg rounded-md bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition"
+                      className="w-[80%] p-2 text-base md:text-lg rounded-md bg-gray-100 text-gray-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition"
                     />
                     {editTasks.length === 1 ? (
                       <button
                         onClick={() => addNewTaskToEdit(index)}
-                        className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
+                        className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300  text-white text-base md:text-lg p-1 rounded-2xl hover:bg-gray-700 transition"
                       >
                         <IoMdAdd />
                       </button>
@@ -373,13 +373,13 @@ const Add = () => {
                       <>
                         <button
                           onClick={() => removeTaskFromEdit(index)}
-                          className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
+                          className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600 text-white text-base md:text-lg p-1 rounded-2xl transition"
                         >
                           <FaMinus />
                         </button>
                         <button
                           onClick={() => addNewTaskToEdit(index)}
-                          className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
+                          className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600 text-white text-base md:text-lg p-1 rounded-2xl  transition"
                         >
                           <IoMdAdd />
                         </button>
@@ -387,7 +387,7 @@ const Add = () => {
                     ) : (
                       <button
                         onClick={() => removeTaskFromEdit(index)}
-                        className="bg-gray-900 text-white text-base md:text-xl p-2 rounded-2xl hover:bg-gray-700 transition"
+                        className="bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600 text-white text-base md:text-lg p-1 rounded-2xl transition"
                       >
                         <FaMinus />
                       </button>
@@ -402,7 +402,7 @@ const Add = () => {
           ${
             loading
               ? "bg-blue-300 cursor-not-allowed"
-              : "bg-gray-900 hover:bg-gray-600"
+              : "bg-gradient-to-r from-gray-700 via-purple-400 to-gray-700 hover:bg-gradient-to-r hover:from-gray-600 hover:via-purple-300 hover:to-gray-600"
           } 
           transition duration-300`}
               >

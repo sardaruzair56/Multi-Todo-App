@@ -58,16 +58,16 @@ const SignUp = () => {
 
   return (
     <div
-      className="w-full h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url(${image})` }}
+      className="w-full h-screen bg-cover bg-center bg-gradient-to-r from-gray-950 via-purple-900 to-gray-950"
+      // style={{ backgroundImage: `url(${image})` }}
     >
       <ToastContainer />
       <div className="flex justify-center items-center w-full h-full bg-black bg-opacity-70 px-4">
-        <div className="flex flex-col items-center bg-gray-200 bg-opacity-80 w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center bg-gradient-to-r from-gray-500 via-purple-300 to-gray-500 bg-opacity-80 w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-lg">
           <p className="w-full text-center font-extrabold text-xl md:text-2xl lg:text-3xl mb-6 text-red-900">
             WELCOME!
           </p>
-          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-8 text-gray-900">
+          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-8 text-purple-950">
             Create Your Account
           </p>
           <input
@@ -75,35 +75,35 @@ const SignUp = () => {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="Enter your First Name"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 transition duration-300"
+            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           <input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Enter your Last Name"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 transition duration-300"
+            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your Email"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 transition duration-300"
+            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your Password"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 transition duration-300"
+            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm your Password"
-            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 transition duration-300"
+            className="w-[80%] mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-500 transition duration-300"
           />
           <button
             onClick={handleSignUp}
@@ -112,7 +112,7 @@ const SignUp = () => {
           ${
             loading
               ? "bg-blue-300 cursor-not-allowed"
-              : "bg-gray-900 hover:bg-gray-800"
+              : "bg-gradient-to-r from-gray-900 via-purple-500 to-gray-900 hover:bg-gradient-to-r hover:from-gray-700 hover:via-purple-400 hover:to-gray-700"
           } 
           transition duration-300`}
           >
