@@ -197,7 +197,7 @@ const Add = () => {
           </div>
         )}
 
-        <div className="rounded-lg p-4 w-[30rem] max-w-md md:max-w-lg lg:max-w-2xl shadow-md shadow-purple-400 border-2 bg-purple-100">
+        <div className="rounded-lg p-4 sm:w-[10rem] md:w-[20rem] max-w-md md:max-w-lg lg:max-w-2xl shadow-md shadow-purple-400 border-2 bg-purple-100">
           <input
             type="text"
             value={title}
@@ -258,7 +258,7 @@ const Add = () => {
           </button>
         </div>
 
-        <div className="mt-8 w-[30rem] max-w-md md:max-w-lg lg:max-w-2xl">
+        <div className="mt-8 sm:w-[10rem] md:w-[20rem] max-w-md md:max-w-lg lg:max-w-2xl">
           {storeLists?.length ? (
             storeLists.map((list, listIndex) => (
               <div

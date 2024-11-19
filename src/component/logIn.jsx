@@ -101,7 +101,7 @@ const Login = () => {
             <span className="text-sm md:text-base lg:text-lg">
               Create Account
             </span>
-            <p className="text-sm md:text-base lg:text-lg">
+            <p className="text-sm md:text-base mb-1 lg:text-lg">
               <FaArrowRightLong />
             </p>
           </button>
