@@ -174,10 +174,7 @@ const Add = () => {
   };
 
   return (
-    <div
-      className="w-full min-h-screen bg-cover bg-center bg-white"
-      // style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="w-full min-h-screen bg-cover bg-center bg-white">
       <div className="flex flex-col items-center justify-center p-4">
         <button
           onClick={handleLogout}
@@ -185,122 +182,115 @@ const Add = () => {
         >
           <IoLogOutSharp />
         </button>
+
         {editModalOpen ? (
           ""
         ) : (
-          <div className="flex bg-purple-100 flex-row border-2 w-[50%] shadow-inner shadow-purple-800 rounded-2xl px-4 md:px-4 py-2 mb-7 max-w-full md:w-[37rem] text-center sticky top-0 z-10">
-            <p
-              className="bg-cover bg-center w-[5rem] h-[5rem] ml-10 rounded-2xl 
-             md:w-[3em] md:h-[3rem] md:ml-3"
+          <div className="flex bg-purple-100 flex-row border-2 w-full max-w-md md:max-w-2xl shadow-inner shadow-purple-800 rounded-2xl px-4 py-2 mb-7 text-center sticky top-0 z-10">
+            <div
+              className="bg-cover bg-center w-16 h-16 rounded-2xl md:w-12 md:h-12"
               style={{ backgroundImage: `url(${image})` }}
-            ></p>
-
-            <h1 className="text-2xl mt-2 ml-8 md:text-3xl font-bold text-purple-900">
+            ></div>
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-purple-900 ml-4">
               Multi-ToDo App
             </h1>
           </div>
         )}
 
-        <div className="rounded-lg p-4 md:w-[23rem] shadow-md shadow-purple-400 border-2 bg-purple-100">
+        <div className="rounded-lg p-4 w-[30rem] max-w-md md:max-w-lg lg:max-w-2xl shadow-md shadow-purple-400 border-2 bg-purple-100">
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter Title"
-            className="w-[70%] mb-4 p-2 text-lg rounded-md bg-gray-300 text-purple-950 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
+            className="w-[75%] mb-4 p-3 text-sm md:text-lg rounded-md bg-gray-300 text-purple-950 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           {tasks.map((task, index) => (
-            <div key={index} className="flex items-center mb-4">
+            <div key={index} className="flex flex-wrap items-center gap-2 mb-4">
               <input
                 type="text"
                 value={task}
                 onChange={(e) => handleTaskChange(index, e.target.value)}
                 placeholder="Enter task"
-                className="w-[90%] md:w-[70%] mb-3 p-2 text-lg rounded-md bg-gray-300 text-purple-950 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
+                className="w-[75%] md:w-3/4 mb-2 p-2 text-sm md:text-lg rounded-md bg-gray-300 text-purple-950 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
               />
-              {tasks.length === 1 ? (
-                <button
-                  onClick={() => addNewTask(index)}
-                  className="bg-purple-800 hover:bg-purple-900 text-white text-xl ml-4 p-1 rounded-xl"
-                >
-                  <IoMdAdd />
-                </button>
-              ) : index === tasks.length - 1 ? (
-                <>
-                  <button
-                    onClick={() => removeTask(index)}
-                    className="bg-purple-800 hover:bg-purple-900 text-white text-xl ml-4 p-1 rounded-xl"
-                  >
-                    <FaMinus />
-                  </button>
+              <div className="flex gap-2">
+                {tasks.length === 1 ? (
                   <button
                     onClick={() => addNewTask(index)}
-                    className="bg-purple-800 hover:bg-purple-900 text-white text-xl ml-2 p-1 rounded-xl"
+                    className="bg-purple-800 hover:bg-purple-900 text-white text-lg p-2 rounded-xl"
                   >
                     <IoMdAdd />
                   </button>
-                </>
-              ) : (
-                <button
-                  onClick={() => removeTask(index)}
-                  className="bg-purple-800 hover:bg-purple-900 text-white text-xl ml-4 p-1 rounded-xl"
-                >
-                  <FaMinus />
-                </button>
-              )}
+                ) : (
+                  <>
+                    <button
+                      onClick={() => removeTask(index)}
+                      className="bg-purple-800 hover:bg-purple-900 text-white text-lg p-2 rounded-xl"
+                    >
+                      <FaMinus />
+                    </button>
+                    {index === tasks.length - 1 && (
+                      <button
+                        onClick={() => addNewTask(index)}
+                        className="bg-purple-800 hover:bg-purple-900 text-white text-lg p-2 rounded-xl"
+                      >
+                        <IoMdAdd />
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           ))}
 
           <button
             onClick={addListInArray}
             disabled={loading}
-            className={`w-full md:w-[50%] p-2 rounded-lg text-white font-bold text-xl md:text-xl  
-  ${
-    loading
-      ? "bg-blue-300 cursor-not-allowed"
-      : "bg-purple-800 hover:bg-purple-900"
-  } 
-  transition duration-300`}
+            className={`w-full md:w-3/4 p-2 rounded-lg text-white font-bold text-base md:text-lg  
+          ${
+            loading
+              ? "bg-blue-300 cursor-not-allowed"
+              : "bg-purple-800 hover:bg-purple-900"
+          } transition duration-300`}
           >
-            {loading ? "Logging in..." : "Add Todo"}
+            {loading ? "Adding..." : "Add Todo"}
           </button>
         </div>
 
-        <div className="mt-8 w-[100%] md:w-[23rem]">
+        <div className="mt-8 w-[30rem] max-w-md md:max-w-lg lg:max-w-2xl">
           {storeLists?.length ? (
             storeLists.map((list, listIndex) => (
               <div
                 key={list.id || listIndex}
-                className="mb-6 p-3 bg-purple-100 rounded-lg shadow-md border-2 shadow-purple-400"
+                className="mb-6 p-4 bg-purple-100 rounded-lg shadow-md border-2 shadow-purple-400"
               >
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl md:text-xl font-bold text-purple-950">
+                  <h2 className="text-lg md:text-xl font-bold text-purple-950">
                     {list.title}
                   </h2>
                   <div className="flex gap-2">
                     <button
                       onClick={() => openEditModal(list, listIndex)}
                       disabled={loading}
-                      className={`p-2 h-8 rounded-xl mt-2 text-white font-bold text-sm md:text-sm 
-                ${
-                  loading
-                    ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-purple-800 hover:bg-purple-900"
-                } 
-                transition duration-300`}
+                      className={`p-2 h-8 rounded-xl text-white text-sm md:text-base 
+                    ${
+                      loading
+                        ? "bg-gray-300 cursor-not-allowed"
+                        : "bg-purple-800 hover:bg-purple-900"
+                    } transition duration-300`}
                     >
                       <FiEdit />
                     </button>
                     <button
                       disabled={loading}
                       onClick={() => handleDeleteList(list.id)}
-                      className={`p-2 h-8 rounded-xl mt-2 text-white font-bold text-sm md:text-sm 
-                ${
-                  loading
-                    ? "bg-red-300 cursor-not-allowed"
-                    : "bg-red-700 hover:bg-red-600"
-                } 
-                transition duration-300`}
+                      className={`p-2 h-8 rounded-xl text-white text-sm md:text-base 
+                    ${
+                      loading
+                        ? "bg-red-300 cursor-not-allowed"
+                        : "bg-red-700 hover:bg-red-600"
+                    } transition duration-300`}
                     >
                       <RiDeleteBin6Fill />
                     </button>
@@ -309,23 +299,23 @@ const Add = () => {
                 {list.todos?.map((todo, todoIndex) => (
                   <div
                     key={todo.id || todoIndex}
-                    className="flex flex-wrap items-center mt-4 justify-between mb-2 gap-2"
+                    className="flex flex-wrap items-center mt-4 gap-2"
                   >
                     <input
                       type="text"
                       value={todo.text}
-                      className="md:w-[16rem] p-2 text-base md:text-lg rounded-md bg-white text-purple-950 outline-none read-only:disabled"
+                      readOnly
+                      className="w-full md:w-3/4 p-2 text-sm md:text-lg rounded-md bg-white text-purple-950"
                     />
                     <button
                       onClick={() => handleDeleteTodo(list.id, todo.id)}
                       disabled={loading}
-                      className={`p-2 rounded-xl text-white font-bold text-sm md:text-sm 
-              ${
-                loading
-                  ? "bg-red-300 cursor-not-allowed"
-                  : "bg-red-700 hover:bg-red-600"
-              } 
-              transition duration-300`}
+                      className={`p-2 rounded-xl text-white text-sm md:text-base 
+                    ${
+                      loading
+                        ? "bg-red-300 cursor-not-allowed"
+                        : "bg-red-700 hover:bg-red-600"
+                    } transition duration-300`}
                     >
                       <MdOutlineCancel />
                     </button>
@@ -334,38 +324,44 @@ const Add = () => {
               </div>
             ))
           ) : (
-            <p className="font-extrabold text-white text-center">
-              No Data Available
+            <p className="text-center font-bold text-purple-900">
+              No data available
             </p>
           )}
         </div>
 
         {editModalOpen && (
-          <div className="fixed inset-10 flex items-center justify-center bg-purple-200 bg-opacity-50 px-4">
-            <div className="bg-white p-6 rounded-lg w-full max-w-[36rem] max-h-screen overflow-y-auto">
+          <div className="fixed inset-0 flex items-center justify-center bg-purple-200 bg-opacity-50 px-4">
+            <div className="bg-white p-6 rounded-lg w-full max-w-sm md:max-w-lg lg:max-w-2xl max-h-screen overflow-y-auto shadow-lg">
+              {/* Modal Header */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-2xl md:text-3xl font-bold text-purple-950 shadow-inner shadow-purple-800 bg-purple-200 rounded-xl px-4 py-2 md:px-6 md:py-3 text-center">
+                <p className="text-xl md:text-2xl lg:text-3xl font-bold text-purple-950 shadow-inner shadow-purple-800 bg-purple-200 rounded-xl px-4 py-2 md:px-6 md:py-3 text-center">
                   Update Your Tasks
                 </p>
                 <button
                   onClick={closeEdit}
-                  className="bg-red-700 text-white text-base md:text-lg p-2 rounded-2xl hover:bg-red-600 transition"
+                  className="bg-red-700 text-white text-sm md:text-base p-2 rounded-2xl hover:bg-red-600 transition"
                 >
                   <GiCancel />
                 </button>
               </div>
 
+              {/* Edit Title Input */}
               <input
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
                 placeholder="Edit list title"
-                className="w-[80%] mb-4 p-2 text-base md:text-lg font-bold rounded-md bg-purple-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition"
+                className="w-[75%] mb-4 p-3 text-sm md:text-lg rounded-md bg-purple-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition"
               />
 
+              {/* Tasks Section */}
               <div className="space-y-4">
                 {editTasks.map((task, index) => (
-                  <div key={index} className="flex items-center space-x-3">
+                  <div
+                    key={index}
+                    className="flex flex-wrap items-center gap-3"
+                  >
                     <input
                       type="text"
                       value={task.text}
@@ -373,53 +369,51 @@ const Add = () => {
                         handleEditTaskChange(index, e.target.value)
                       }
                       placeholder="Edit task"
-                      className="w-[80%] p-2 text-base md:text-lg rounded-md bg-purple-100 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition"
+                      className="w-[75%] md:w-3/4 p-3 text-sm md:text-lg rounded-md bg-purple-100 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition"
                     />
-                    {editTasks.length === 1 ? (
-                      <button
-                        onClick={() => addNewTaskToEdit(index)}
-                        className="bg-purple-800 hover:bg-purple-900  text-white text-base md:text-lg p-1 rounded-2xl transition"
-                      >
-                        <IoMdAdd />
-                      </button>
-                    ) : index === editTasks.length - 1 ? (
-                      <>
-                        <button
-                          onClick={() => removeTaskFromEdit(index)}
-                          className="bg-purple-800 hover:bg-purple-900 text-white text-base md:text-lg p-1 rounded-2xl transition"
-                        >
-                          <FaMinus />
-                        </button>
+                    <div className="flex gap-2">
+                      {editTasks.length === 1 ? (
                         <button
                           onClick={() => addNewTaskToEdit(index)}
-                          className="bg-purple-800 hover:bg-purple-900 text-white md:text-lg p-1 rounded-2xl  transition"
+                          className="bg-purple-800 hover:bg-purple-900 text-white text-sm md:text-lg p-2 rounded-xl transition"
                         >
                           <IoMdAdd />
                         </button>
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => removeTaskFromEdit(index)}
-                        className="bg-purple-800 hover:bg-purple-900 text-white text-base md:text-lg p-1 rounded-2xl transition"
-                      >
-                        <FaMinus />
-                      </button>
-                    )}
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => removeTaskFromEdit(index)}
+                            className="bg-purple-800 hover:bg-purple-900 text-white text-sm md:text-lg p-2 rounded-xl transition"
+                          >
+                            <FaMinus />
+                          </button>
+                          {index === editTasks.length - 1 && (
+                            <button
+                              onClick={() => addNewTaskToEdit(index)}
+                              className="bg-purple-800 hover:bg-purple-900 text-white text-sm md:text-lg p-2 rounded-xl transition"
+                            >
+                              <IoMdAdd />
+                            </button>
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
 
+              {/* Save Changes Button */}
               <button
                 onClick={saveEditChanges}
-                className={`w-full md:w-[50%] p-2 rounded-xl mt-6 text-white font-bold text-lg md:text-2xl 
-          ${
-            loading
-              ? "bg-blue-300 cursor-not-allowed"
-              : "bg-purple-800 hover:bg-purple-900"
-          } 
-          transition duration-300`}
+                disabled={loading}
+                className={`w-full md:w-1/2 p-3 rounded-xl mt-6 text-white font-bold text-sm md:text-lg lg:text-xl 
+        ${
+          loading
+            ? "bg-blue-300 cursor-not-allowed"
+            : "bg-purple-800 hover:bg-purple-900"
+        } transition duration-300`}
               >
-                {loading ? "Logging in..." : "Update"}
+                {loading ? "Updating..." : "Update"}
               </button>
             </div>
           </div>

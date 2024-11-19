@@ -5,7 +5,7 @@ import { loginUser } from "../Redux/taskSlices";
 import { setUser } from "../Redux/taskSlices";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
-import image from '../assets/logo.png';
+import image from "../assets/logo.png";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -53,18 +53,18 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="w-full h-screen bg-cover bg-center bg-white"
-    >
+    <div className="w-full h-screen bg-cover bg-center bg-white">
       <ToastContainer />
       <div className="flex justify-center items-center w-full h-full px-4">
-        <div className="flex flex-col items-center bg-purple-50 w-full max-w-md md:max-w-lg lg:max-w-xl p-6 rounded-lg shadow-md border-2 shadow-purple-500">
-         
-          <p className="w-full text-center font-extrabold text-xl md:text-2xl lg:text-3xl mb-4 text-red-900" >
-            <p className="bg-cover bg-center w-[5rem] h-[5rem] rounded-2xl ml-[14rem] mt-4 mb-4 "style={{ backgroundImage: `url(${image})` }}/>
+        <div className="flex flex-col items-center bg-purple-50 w-full max-w-sm md:max-w-md lg:max-w-lg p-6 rounded-lg shadow-md border-2 shadow-purple-500">
+          <div
+            className="w-[5rem] h-[5rem] rounded-2xl bg-cover bg-center mb-4 md:mb-6"
+            style={{ backgroundImage: `url(${image})` }}
+          />
+          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-2 md:mb-4 text-red-900">
             WELCOME!
           </p>
-          <p className="w-full text-center font-extrabold text-lg md:text-xl lg:text-2xl mb-8 text-purple-950">
+          <p className="w-full text-center font-extrabold text-sm md:text-lg lg:text-xl mb-6 text-purple-950">
             Login
           </p>
           <input
@@ -72,35 +72,40 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full max-w-sm mb-4 p-3 rounded-md border-purple-950 bg-gray-200 font-semibold text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
+            className="w-full mb-4 p-3 rounded-md border-purple-950 bg-gray-200 font-semibold text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full max-w-sm mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
+            className="w-full mb-4 p-3 rounded-md bg-gray-200 text-purple-950 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-purple-300 transition duration-300"
           />
           <button
             onClick={handleLogin}
             disabled={loading}
-            className={`w-full max-w-sm p-3 rounded-md text-white font-bold 
+            className={`w-full p-3 rounded-md text-white font-bold 
           ${
             loading
               ? "bg-blue-300 cursor-not-allowed"
-              : "bg-purple-800 hover:bg-gradient-to-r hover:bg-purple-900"
+              : "bg-purple-800 hover:bg-purple-900"
           } 
           transition duration-300`}
           >
-            {loading ? "Logging in..." : "LogIn"}
+            {loading ? "Logging in..." : "Log In"}
           </button>
           <button
             onClick={handleSignup}
-            className="flex items-center gap-2 ml-56 w-full max-w-sm mt-4 p-3 rounded-md text-purple-800 font-bold justify-center hover:text-purple-900 transition"
+            className="flex gap-2 w-full mt-2 p-3 rounded-md text-purple-800 font-bold items-end justify-end hover:text-purple-900 transition"
           >
-            Create Account
-            <FaArrowRightLong />
+            <span className="text-sm md:text-base lg:text-lg">
+              Create Account
+            </span>
+            <p className="text-sm md:text-base lg:text-lg">
+              <FaArrowRightLong />
+            </p>
           </button>
+
           {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </div>
