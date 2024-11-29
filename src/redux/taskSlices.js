@@ -15,18 +15,14 @@ import {
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { app } from "../firebase";
 
-// Firebase initialization
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Async Thunks
-
-// Add List to Firebase
 export const addListToFirebase = createAsyncThunk(
   "Todos/addListToFirebase",
   async ({ list, userId }, { rejectWithValue }) => {
     try {
-      const listWithUserId = { ...list, userId }; // This should include title and todos
+      const listWithUserId = { ...list, userId };
       if (!listWithUserId.title || !listWithUserId.todos) {
         throw new Error("Title and todos are required.");
       }
@@ -39,13 +35,13 @@ export const addListToFirebase = createAsyncThunk(
   }
 );
 
-// Delete List from Firebase
+
 export const deleteListFromFirebase = createAsyncThunk(
   "Todos/deleteListFromFirebase",
   async (listId, { rejectWithValue }) => {
     try {
       const docRef = doc(db, "Todos", listId);
-      await deleteDoc(docRef); // Delete the document from the collection
+      await deleteDoc(docRef); 
       return { listId };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -53,7 +49,7 @@ export const deleteListFromFirebase = createAsyncThunk(
   }
 );
 
-// Fetch Lists from Firebase
+
 export const fetchListsFromFirebase = createAsyncThunk(
   "Todos/fetchListsFromFirebase",
   async (userId, { rejectWithValue }) => {
@@ -68,14 +64,14 @@ export const fetchListsFromFirebase = createAsyncThunk(
         id: doc.id,
       }));
 
-      return { lists }; // This should contain title and todos
+      return { lists }; 
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
 
-// Delete Task from Firebase
+
 export const deleteTaskFromFirebase = createAsyncThunk(
   "Todos/deleteTaskFromFirebase",
   async ({ listId, taskId }, { rejectWithValue }) => {
@@ -99,7 +95,8 @@ export const deleteTaskFromFirebase = createAsyncThunk(
   }
 );
 
-// Update List in Firebase
+
+
 export const updateListInFirebase = createAsyncThunk(
   "Todos/updateListInFirebase",
   async ({ listId, updatedList }, { rejectWithValue }) => {
@@ -114,7 +111,7 @@ export const updateListInFirebase = createAsyncThunk(
   }
 );
 
-// Login User
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
@@ -158,14 +155,12 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-// Initial State
 const initialState = {
   lists: [],
-  user: null, // User state will be handled by Redux Persist
+  user: null, 
   error: null,
 };
 
-// Slice Reducer
 const listsSlice = createSlice({
   name: "lists",
   initialState,
@@ -174,11 +169,11 @@ const listsSlice = createSlice({
       state.lists.push(actions.payload);
     },
     setUser: (state, action) => {
-      state.user = action.payload; // Save user info in the Redux state
+      state.user = action.payload; 
     },
     logOut: (state) => {
       state.user = null;
-      localStorage.removeItem("uid"); // Remove user from localStorage
+      localStorage.removeItem("uid"); 
     },
   },
   extraReducers: (builder) => {
@@ -186,21 +181,21 @@ const listsSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        console.log("action:::", action.payload); // Update user data on successful login
+        console.log("action:::", action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; // Store error message
+        state.error = action.payload;
       })
       .addCase(deleteListFromFirebase.fulfilled, (state, action) => {
         const { listId } = action.payload;
-        state.lists = state.lists.filter((list) => list.id !== listId); // Remove the list from the Redux state
+        state.lists = state.lists.filter((list) => list.id !== listId); 
       })
       .addCase(deleteListFromFirebase.rejected, (state, action) => {
-        state.error = action.payload; // Handle any errors
+        state.error = action.payload; 
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        state.user = null; // Clear user info on logout
+        state.user = null; 
         state.lists = [];
         state.error = null;
       })
